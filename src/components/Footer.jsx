@@ -18,9 +18,9 @@ import SendIcon from '@mui/icons-material/Send';
 import ColorLensRoundedIcon from '@mui/icons-material/ColorLensRounded';
 
 export default function Footer() {
-    const [color, setColor] = useState('neutral');
+    const [color, setColor] = useState('primary');
   return (
-    <div>
+    <div className='bottom-0'>
     <Sheet
       variant="solid"
       color={color}
@@ -29,7 +29,7 @@ export default function Footer() {
         {
           flexGrow: 1,
           p: 2,
-          borderRadius: { xs: 0, sm: 'sm' },
+          borderRadius: 0,
         },
         color !== 'neutral' && {
           bgcolor: `${color}.800`,
@@ -37,19 +37,19 @@ export default function Footer() {
       ]}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <IconButton
+        {/* <IconButton
           variant="soft"
           size="sm"
           onClick={() => {
-            const colors = ['primary', 'neutral', 'danger', 'success', 'warning'];
+            const colors = ['primary'];
 
             const nextColorIndex = colors.indexOf(color) + 1;
             setColor(colors[nextColorIndex] ?? colors[0]);
           }}
         >
           <ColorLensRoundedIcon fontSize="small" />
-        </IconButton>
-        <Divider orientation="vertical" />
+        </IconButton> */}
+        {/* <Divider orientation="vertical" /> */}
         <IconButton variant="plain">
           <FacebookRoundedIcon />
         </IconButton>

@@ -1,36 +1,34 @@
-import React from 'react'
+import * as React from 'react';
+import { Account, AuthenticationContext, SessionContext } from '@toolpad/core';
 
-export default function Login() {
+const demoSession = {
+  user: {
+    name: 'Bharat Kashyap',
+    email: 'bharatkashyap@outlook.com',
+    image: 'https://avatars.githubusercontent.com/u/19550456',
+  },
+};
+
+export default function AccountDemoSignedIn() {
+  const [session, setSession] = React.useState(demoSession);
+  const authentication = React.useMemo(() => {
+    return {
+      signIn: () => {
+        setSession(demoSession);
+      },
+      signOut: () => {
+        setSession(null);
+      },
+    };
+  }, []);
+
   return (
-    <div>
-     
-<div className="bg-light">
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-        <div className="card" style={{width: "30rem"}}>
-            <div className="card-body">
-                <h5 className="card-title text-center">Login</h5>
-                <form>
-                    <div className="mb-3">
-                        <label htmlFor="email" className="htmlForm-label">Email address</label>
-                        <input type="email" className="htmlForm-control" id="email" required />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className="htmlForm-label">Password</label>
-                        <input type="password" className="htmlForm-control" id="password" required />
-                    </div>
-                    <button type="submit" className="btn btn-primary w-100">Login</button>
-                </form>
-                <div className="text-center mt-3">
-                    <a href="#">Forgot Password?</a>
-                </div>
-                <div className="text-center mt-2">
-                    <small>Don't have an account? <a href="#">Sign up</a></small>
-                </div>
-            </div>
-        </div>
+    <div className="logindiv">
+    <AuthenticationContext.Provider value={authentication}>
+      <SessionContext.Provider value={session}>
+        <Account />
+      </SessionContext.Provider>
+    </AuthenticationContext.Provider>
     </div>
-
-</div>
-    </div>
-  )
+  );
 }

@@ -148,7 +148,6 @@ td .btn-toggle {
 .mt-7 {
   margin-top: 50px !important;
 }
-/* Optional: hover effect for better interactivity */
 .btn-toggle:hover {
   background-color: #b0bec5 !important; /* Darker grey on hover */
 }
@@ -176,6 +175,37 @@ tbody{
 .table th {
   width: 12.5%; 
   text-align: center; 
+}
+.adhkar-container{
+  width: 80%;
+}
+.adhimg img{
+  max-height: 200px;
+}
+.adh-outer{
+  height: 95vh;
+}
+.text{
+  font-size: larger;
+  font-style: italic;
+}
+.adh-btn{
+  margin: 40px;
+  width: 40%;
+}
+.Signindiv{
+  padding:50px;
+  padding-bottom: 100px;
+}
+.logindiv{
+  padding: 50px;
+}
+.date{
+  height:70%;
+  width:15%;
+}
+.dateinner{
+  height: fit-content;
 }
 @media (prefers-color-scheme: light) {
   :root {
