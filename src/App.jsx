@@ -3,8 +3,7 @@ import Navbar from './components/Navbar'
 import Landing from './components/Landing';
 import Login from './components/Login'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Tracker from './components/Tracker';
-import Adhkardetails from './components/Adhkar-details';
+import Tracker from './components/Tracker/Tracker';
 import AdhkarCards from './components/AdhkarCards';
 import Footer from './components/Footer';
 import SignIn from './components/Signin';

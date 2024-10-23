@@ -4,8 +4,6 @@ import { fetchAdhkar } from '../redux/AdhkarSlice';
 import AdhkarCards from './AdhkarCards';
 import { setPage } from '../redux/AdhkarSlice';
 
-import AdhkarBook from './AdhkarBook';
-
 export default function Adhkardetails() {
     const dispatch = useDispatch();
     const { data, status, error, selectedBook, page } = useSelector((state) => state.adhkar);
@@ -41,10 +39,6 @@ export default function Adhkardetails() {
     
     return (
         <div>
-            {/* <div style={{display:'hidden'}}>
-
-            <AdhkarBook />
-            </div> */}
             <div className="card">
                 <AdhkarCards data={allData} />
             </div>

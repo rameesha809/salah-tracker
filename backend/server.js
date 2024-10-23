@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors';
 import dotenv from 'dotenv';
+import prayerRoutes from './routes/Prayer.js'
 import islamicDateTimeRoute from './routes/IslamicDateTime.js';
 import AdhkarRoute from './routes/Adhkar.js';
 const app = express();
@@ -13,7 +14,7 @@ app.get('/', (req, res) => {
 })
 app.use('/api/islamicDateTime', islamicDateTimeRoute); 
 app.use('/api/adhkar', AdhkarRoute); 
-
+app.use('/api/postPrayer', prayerRoutes);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
