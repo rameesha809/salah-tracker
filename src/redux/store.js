@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import islamicDateReducer from './IslamicDateTimeSlice';
 import prayerSlice from './PrayerSlice';
+import missingPrayersSlice from './MissingPrayers';
 import AdhkarApiSlice from './AdhkarSlice';
 
 const store = configureStore({
@@ -8,6 +9,7 @@ const store = configureStore({
     islamicDateTime: islamicDateReducer, 
     adhkar: AdhkarApiSlice, 
     prayer: prayerSlice,
+    missing: missingPrayersSlice,
   },
 });
 

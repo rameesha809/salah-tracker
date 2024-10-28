@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIslamicDateTime } from '../redux/IslamicDateTimeSlice';
 import Adhkar from './Adhkar';
+import SalahTracking from './SalahTracking';
 export default function Landing() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
+      <SalahTracking />
       <Adhkar />
     </>
   )

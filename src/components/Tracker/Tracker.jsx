@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti';
-import { postPrayer } from '../../redux/PrayerSlice';
+import { postPrayer ,fetchPrayers} from '../../redux/PrayerSlice';
 import { useDispatch } from 'react-redux';
 export default function Tracker() {
   const dispatch = useDispatch();
@@ -55,7 +55,31 @@ export default function Tracker() {
     };
     dispatch(postPrayer({ userId: "10", prayersDone: prayerDetailsForDay }));
   };
+  const fetchPrayersData = async () => {
+    try {
+      const response = await dispatch(fetchPrayers("10")); // Fetching prayer data for userId "10"
+      const fetchedData = response.payload; // Adjust based on your API response structure
+      console.log("fetched data:",fetchedData);
+      
+      const updatedPrayersDone = { ...prayersDone };
+      Object.entries(fetchedData).forEach(([date, prayerData]) => {
+        const dayIndex = new Date(date).getDay(); // Get day index (0 for Sunday, 1 for Monday, etc.)
+        const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1]; // Convert index to day name (0 => sun, 1 => mon, etc.)
+        
+        Object.entries(prayerData).forEach(([prayer, status]) => {
+          updatedPrayersDone[dayName][prayer] = status.done; // Set the prayer status
+        });
+      });
 
+      setPrayerDone(updatedPrayersDone);
+    } catch (error) {
+      console.error("Error fetching prayers:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPrayersData();
+  }, []);
   useEffect(() => {
     const allChecked = days.every((day) =>
       prayers.every((prayer) => prayersDone[day][prayer])
@@ -73,7 +97,7 @@ export default function Tracker() {
   return (
     <div className="container-outer">
       <div className="container mt-7 d-flex flex-column align-items-center">
-        <h2 className="text-center mb-4">Salah Tracker</h2>
+        <h2 className="text-center mb-4" style={{color:'white'}}>Salah Tracker</h2>
         <table className="table table-bordered text-center">
           <thead className="table-primary rounded-pill">
             <tr className="rounded-pill">
@@ -94,7 +118,7 @@ export default function Tracker() {
                       className="btn-check"
                       id={`${prayer}-${day}`}
                       autoComplete="off"
-                      checked={prayersDone[day][prayer]} // Ensure the correct state mapping
+                      checked={prayersDone[day][prayer]} 
                       onChange={() => handleSalahChange(day, prayer)}
                     />
                     <label className={`btn btn-toggle`} htmlFor={`${prayer}-${day}`}></label>

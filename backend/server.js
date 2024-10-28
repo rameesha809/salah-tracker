@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 app.use('/api/islamicDateTime', islamicDateTimeRoute); 
 app.use('/api/adhkar', AdhkarRoute); 
 app.use('/api/postPrayer', prayerRoutes);
+app.use('/api/prayers', prayerRoutes);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

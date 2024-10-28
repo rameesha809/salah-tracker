@@ -24,6 +24,7 @@ const createPrayer = async (userId, prayersDone) => {
                 $2::JSONB -> '${prayerDate}',
                 true
             )
+                RETURNING prayer_data;
         `;
         
         const result = await pool.query(query, [userId, JSON.stringify(newPrayerData)]);
@@ -35,5 +36,22 @@ const createPrayer = async (userId, prayersDone) => {
     }
 };
 
-export default createPrayer;
+const fetchPrayers = async (userId) => {
+    try {
+        const query = 'SELECT prayer_data FROM salah WHERE user_id = $1';
+        const result = await pool.query(query, [userId]);
+
+        if (result.rows.length > 0) {
+            return result.rows[0].prayer_data; 
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Error fetching prayer data:", error.message);
+        throw error;
+    }
+};
+
+
+export { createPrayer, fetchPrayers };
 

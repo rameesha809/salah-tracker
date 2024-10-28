@@ -1,16 +1,29 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import LoginModal from './Login'
 export default function Navbar() {
+  const [showLogin, setShowLogin] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleLoginClick = () => {
+    setIsModalVisible(true);
+    setShowLogin(true);
+  };
+
+  const handleClose = () => {
+    setShowLogin(false);
+    setTimeout(() => {
+      setIsModalVisible(false);
+    }, 300);
+  };
     return (
         <div style={{paddingBottom:"20px"}}>
   <nav className="navbar bg-body-tertiary fixed-top d-flex flex-row align-items-center">
     <div className="container-fluid d-flex align-items-center">
       <i className="fas fa-mosque me-2 icon-blue"></i>
       <a className="navbar-brand">Salah Tracker</a>
-      <form className="d-flex ms-auto" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-primary" type="submit">Search</button>
-      </form>
+      <button className="btn d-flex ms-auto" style={{backgroundColor:'#12467B', color:'white'}} onClick={handleLoginClick}>Login</button>
+
+      {isModalVisible && <LoginModal show={showLogin} handleClose={handleClose} />}  
     </div>
   </nav>
 </div>

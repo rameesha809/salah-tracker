@@ -8,10 +8,15 @@ import AdhkarCards from './components/AdhkarCards';
 import Footer from './components/Footer';
 import SignIn from './components/Signin';
 import AdhkarBookSelector from './components/AdhkarBookSelector';
+import Missing from './components/missingPrayer/missing';
+import Visualize from './components/visualizing/Visualize';
+import 'animate.css';
+
 function App() {
 
   return (
     <>
+      
       <Router>
         <Navbar />
         <Routes>
@@ -21,6 +26,8 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Signin" element={<SignIn />} />
           <Route path="/Adhkar-cards" element={<AdhkarCards />} />
+          <Route path="/Visualize" element={<Visualize />} />
+          <Route path="/Missing" element={<Missing />} />
         </Routes>
         <Footer />
       </Router>
