@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import LoginModal from './Login'
+import Auth from './Auth/Auth';
 export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleLoginClick = () => {
-    setIsModalVisible(true);
     setShowLogin(true);
+    setIsModalVisible(true);
   };
 
   const handleClose = () => {
@@ -23,7 +23,7 @@ export default function Navbar() {
       <a className="navbar-brand">Salah Tracker</a>
       <button className="btn d-flex ms-auto" style={{backgroundColor:'#12467B', color:'white'}} onClick={handleLoginClick}>Login</button>
 
-      {isModalVisible && <LoginModal show={showLogin} handleClose={handleClose} />}  
+      {isModalVisible && <Auth show={showLogin} handleClose={handleClose} />}  
     </div>
   </nav>
 </div>

@@ -57,18 +57,24 @@ export default function Tracker() {
   };
   const fetchPrayersData = async () => {
     try {
-      const response = await dispatch(fetchPrayers("10")); // Fetching prayer data for userId "10"
-      const fetchedData = response.payload; // Adjust based on your API response structure
+      const response = await dispatch(fetchPrayers("10")); 
+      const fetchedData = response.payload; 
       console.log("fetched data:",fetchedData);
       
       const updatedPrayersDone = { ...prayersDone };
       Object.entries(fetchedData).forEach(([date, prayerData]) => {
-        const dayIndex = new Date(date).getDay(); // Get day index (0 for Sunday, 1 for Monday, etc.)
-        const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1]; // Convert index to day name (0 => sun, 1 => mon, etc.)
-        
-        Object.entries(prayerData).forEach(([prayer, status]) => {
-          updatedPrayersDone[dayName][prayer] = status.done; // Set the prayer status
-        });
+        const dayIndex = new Date(date).getDay(); 
+        const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1]; 
+        const dayEntry = Object.entries(weekDates).find(([, weekDate]) => weekDate === date);
+        if (dayEntry) {
+          const [dayName] = dayEntry; 
+  
+          console.log(`Updating prayers for ${dayName} with data from ${date}`);
+          
+          Object.entries(prayerData).forEach(([prayer, status]) => {
+            updatedPrayersDone[dayName][prayer] = status.done; 
+          });
+        }
       });
 
       setPrayerDone(updatedPrayersDone);

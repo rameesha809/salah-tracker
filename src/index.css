@@ -272,6 +272,10 @@ tbody{
   font-size: 24px;
   cursor: pointer;
 }
+/* Example of more specific targeting */
+.MuiBox-root{
+  margin-top: 0 !important;  
+}
 
 
 @media (prefers-color-scheme: light) {
