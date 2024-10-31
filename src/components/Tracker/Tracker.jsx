@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti';
 import { postPrayer ,fetchPrayers} from '../../redux/PrayerSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 export default function Tracker() {
   const dispatch = useDispatch();
   const [prayersDone, setPrayerDone] = useState({
@@ -17,9 +17,13 @@ export default function Tracker() {
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   const prayers = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
+  const user = useSelector((state) => state.auth.user);
+  console.log("user finalized: ",user)
+  const userId = user ? user.id : null;
+  console.log("user selected:",userId)
   const getCurrentWeekDates = () => {
     const today = new Date();
-    const currentDayIndex = today.getDay(); // 0 is Sunday, 1 is Monday, and so on
+    const currentDayIndex = today.getDay(); 
     const weekDates = {};
 
     const startOfWeek = new Date(today);
@@ -27,8 +31,8 @@ export default function Tracker() {
 
     days.forEach((day, index) => {
       const date = new Date(startOfWeek);
-      date.setDate(startOfWeek.getDate() + index); // Set date for each day of the week
-      weekDates[day] = date.toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+      date.setDate(startOfWeek.getDate() + index); 
+      weekDates[day] = date.toISOString().split('T')[0]; 
     });
 
     return weekDates;
@@ -53,11 +57,11 @@ export default function Tracker() {
       [prayer]: newValue, 
       prayerDate,
     };
-    dispatch(postPrayer({ userId: "10", prayersDone: prayerDetailsForDay }));
+    dispatch(postPrayer({ userId, prayersDone: prayerDetailsForDay }));
   };
   const fetchPrayersData = async () => {
     try {
-      const response = await dispatch(fetchPrayers("10")); 
+      const response = await dispatch(fetchPrayers(userId)); 
       const fetchedData = response.payload; 
       console.log("fetched data:",fetchedData);
       

@@ -38,15 +38,3 @@ export const getPrayersMissed = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch missed prayer data' });
     }
 };
-
-// export const getPrayersOffered = async (req, res) => {
-//     const { userId } = req.params;
-//     console.log("Fetching missed prayers for userId:", userId);
-//     try {
-//         const offeredPrayers = await getMissedPrayers(userId); 
-//         res.status(200).json(offeredPrayers);
-//     } catch (err) {
-//         console.error("Error fetching offered prayers:", err); 
-//         res.status(500).json({ error: 'Failed to fetch offerred prayer data' });
-//     }
-// };

@@ -10,11 +10,11 @@ const pool = new Pool({
 });
 
 pool.on('connect', () => {
-    console.log('Connected to the database'); // Log connection success
+    console.log('Connected to the database'); 
 });
 
 pool.on('error', (err) => {
-    console.error('Unexpected error on idle client', err); // Log database connection errors
+    console.error('Unexpected error on idle client', err); 
 });
 
 export default pool;

@@ -25,7 +25,7 @@ export const fetchPrayers = createAsyncThunk(
           return response.data;
       } catch (error) {
           console.log(error);
-          throw error; // Re-throw the error
+          throw error;
       }
   }
 );
