@@ -9,6 +9,7 @@ import AdhkarBookSelector from './components/AdhkarBookSelector';
 import Missing from './components/missingPrayer/missing';
 import Visualize from './components/visualizing/Visualize';
 import 'animate.css';
+import SavedAdhkar from './components/SavedAdhkar';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Adhkar-cards" element={<AdhkarCards />} />
           <Route path="/Visualize" element={<Visualize />} />
           <Route path="/Missing" element={<Missing />} />
+          <Route path="/Saved" element={<SavedAdhkar />} />
         </Routes>
         <Footer />
       </Router>

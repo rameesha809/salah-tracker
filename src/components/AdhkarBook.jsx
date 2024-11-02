@@ -27,8 +27,6 @@ export default function UnstyledSelectTransitions() {
         <Option value="ibn-e-majah">Sunan Ibn-e-Majah</Option>
         <Option value="sunan-nasai">Sunan An-Nasa`i</Option>
         <Option value="mishkat">Mishkat Al-Masabih</Option>
-        {/* <Option value="musnad-ahmad">Musnad Ahmad</Option>
-        <Option value="al-silsila-sahiha">Al-Silsila Sahiha</Option> */}
       </Select>
     </div>
   );

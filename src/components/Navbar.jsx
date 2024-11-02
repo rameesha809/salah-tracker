@@ -3,6 +3,7 @@ import ThemeSignInPage from './Auth/ThemeSignInPage'; // Ensure the correct impo
 import { useDispatch } from 'react-redux'; // Import useDispatch
 import { logout } from '../redux/SignInSlice'; // Import your logout action
 import 'animate.css'; // Import Animate.css
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
@@ -56,7 +57,8 @@ export default function Navbar() {
       <nav className="navbar bg-body-tertiary fixed-top d-flex flex-row align-items-center">
         <div className="container-fluid d-flex align-items-center">
           <i className="fas fa-mosque me-2 icon-blue"></i>
-          <a className="navbar-brand">Salah Tracker</a>
+          <Link className="navbar-brand" to={'/'}>Salah Tracker</Link>
+          <Link to={'/saved'}>Saved</Link>
           
           {isLoggedIn ? (
             <div

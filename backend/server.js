@@ -6,6 +6,7 @@ import authRoutes from './routes/Auth.js'
 import islamicDateTimeRoute from './routes/IslamicDateTime.js';
 import AdhkarRoute from './routes/Adhkar.js';
 import bodyParser from 'body-parser';
+import savedHadithRoutes from './routes/SaveHadith.js'
 const app = express();
 const port = 5000
 dotenv.config();
@@ -20,6 +21,7 @@ app.use('/api/adhkar', AdhkarRoute);
 app.use('/api/postPrayer', prayerRoutes);
 app.use('/api/prayers', prayerRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api', savedHadithRoutes);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

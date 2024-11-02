@@ -1,25 +1,5 @@
 CREATE DATABASE salahtracking;
 
--- CREATE TABLE salah (
---     id SERIAL PRIMARY KEY,                   -- Unique identifier for each prayer record
---     user_id VARCHAR(255),                    -- ID of the user who is being tracked
---     prayer_date DATE NOT NULL,               -- Date for which the data is recorded
---     fajr JSONB,                              -- JSONB type to store details about Fajr prayer
---     dhuhr JSONB,                             -- JSONB type to store details about Dhuhr prayer
---     asr JSONB,                               -- JSONB type to store details about Asr prayer
---     maghrib JSONB,                           -- JSONB type to store details about Maghrib prayer
---     isha JSONB,                              -- JSONB type to store details about Isha prayer
---     UNIQUE (user_id, prayer_date)            -- Ensure only one entry per user and date
--- );
-
--- CREATE TABLE salah (
---     id SERIAL PRIMARY KEY,                   -- Unique identifier for each prayer record
---     user_id VARCHAR(255),                    -- ID of the user being tracked
---     prayer_date DATE NOT NULL,               -- Date for which the prayers are recorded
---     prayers JSONB,                           -- JSONB to store all prayer data for the day
---     UNIQUE (user_id, prayer_date)            -- Ensure only one entry per user and date
--- );
-
 CREATE TABLE salah (
     user_id VARCHAR(255) PRIMARY KEY,   -- Each user will have a unique entry in the table
     prayer_data JSONB                   -- JSONB field to store prayer records for multiple dates
@@ -30,4 +10,13 @@ CREATE TABLE users (
     username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE saved_hadith (
+    id SERIAL PRIMARY KEY,                
+    user_id INTEGER REFERENCES users(id),  -- Foreign key to link to users table
+    hadith_id VARCHAR(255),               
+    hadith_data JSONB,                    
+    saved_at TIMESTAMP DEFAULT NOW(),     
+    UNIQUE (user_id, hadith_id)            -- Ensure each Hadith can only be saved once per user
 );

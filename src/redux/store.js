@@ -4,6 +4,7 @@ import prayerSlice from './PrayerSlice';
 import missingPrayersSlice from './MissingPrayers';
 import AdhkarApiSlice from './AdhkarSlice';
 import SignInSlice from './SignInSlice';
+import savedHadithReducer from './savedHadithSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     prayer: prayerSlice,
     missing: missingPrayersSlice,
     auth: SignInSlice,
+    savedHadith: savedHadithReducer
   },
 });
 

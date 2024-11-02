@@ -24,6 +24,7 @@ const AdhkarApiSlice = createSlice({
     setSelectedBook(state, action) {
       state.selectedBook = action.payload.book;
       state.page = action.payload.page;
+      state.data = [];
     },
     resetData(state) {
       state.data = [];

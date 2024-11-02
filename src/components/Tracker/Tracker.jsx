@@ -25,7 +25,6 @@ export default function Tracker() {
     const today = new Date();
     const currentDayIndex = today.getDay(); 
     const weekDates = {};
-
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - (currentDayIndex === 0 ? 6 : currentDayIndex - 1)); 
 
