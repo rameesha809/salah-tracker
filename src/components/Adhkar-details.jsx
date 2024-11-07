@@ -10,7 +10,6 @@ export default function Adhkardetails() {
     const [loadingMore, setLoadingMore] = useState(false);
 
     useEffect(() => {
-        // dispatch(resetData());
         if (page === 1) {
             dispatch(fetchAdhkar({ page, book: selectedBook }));
         } else {

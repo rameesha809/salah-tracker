@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { fetchMissedPrayers } from '../../redux/MissingPrayers';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 const SalahTable = () => {
   const initialRows = [
@@ -10,12 +11,17 @@ const SalahTable = () => {
     { id: 4, salah: 'Maghrib', missed: 0 },
     { id: 5, salah: 'Isha', missed: 0 },
   ];
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+  const userId = user ? user.id : null;
   const dispatch = useDispatch();
   const { missedPrayers, loading, error } = useSelector((state) => {
     console.log("Current prayers state:", state.missing.missedPrayers);
     return state.missing || {}});
   useEffect(() => {
-      dispatch(fetchMissedPrayers(10));
+    if (userId) {
+      dispatch(fetchMissedPrayers(userId));
+    }
   }, [dispatch]);
   const [rows, setRows] = useState(initialRows);
   const [editRowId, setEditRowId] = useState(null);
@@ -30,6 +36,9 @@ const SalahTable = () => {
       setRows(updatedRows);
     }
   }, [missedPrayers]);
+  const handleVisualizeClick = () => {
+    navigate('/visualize'); 
+  };
   const handleEditClick = (id, missed) => {
     setEditRowId(id);
     setEditMissed(missed);
@@ -83,10 +92,10 @@ const SalahTable = () => {
                 ) : (
                   <div className='d-flex justify-content-center ' style={styles.editableCell}>
                     <span className='spanofmissed'>{row.missed}</span>
-                    <FaEdit
+                    {/* <FaEdit
                       onClick={() => handleEditClick(row.id, row.missed)}
                       style={styles.editIcon}
-                    />
+                    /> */}
                   </div>
                 )}
               </td>
@@ -95,6 +104,9 @@ const SalahTable = () => {
         </tbody>
       </table>
       </div>
+      <div className="d-flex justify-content-end mb-4 p-5">
+          <button onClick={handleVisualizeClick} style={{color:'black', backgroundColor:'white', borderRadius:'5px'}}>Visualize</button>
+        </div>
     </div>
   );
 };
@@ -119,6 +131,15 @@ const styles = {
     border: 'none',
     color: 'white',
     outline: 'none',
+  },
+  visualizeButton: {
+    backgroundColor: '#004b6b',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '16px',
   },
 };
 

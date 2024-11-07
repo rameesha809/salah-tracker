@@ -17,6 +17,23 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.nav-link {
+  color: black; /* Default color */
+  text-decoration: none; /* Remove underline by default */
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #12467B !important; /* Hover color */
+  text-decoration: underline !important; /* Underline on hover */
+}
+
+.nav-link:focus,
+.nav-link:active {
+  text-decoration: underline !important; /* Underline when clicked */
+  color: #12467B !important; /* Optional to change color on click as well */
+}
+
 
 @keyframes logo-spin {
   from {

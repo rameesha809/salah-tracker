@@ -94,11 +94,10 @@ export default function Footer() {
             minHeight={80}
             sx={{ flexBasis: { xs: 200, md: 'initial' } }}
           >
-            <img alt="" src="/static/blog/mui-product-comparison/ecosystem.png" />
+            <img alt="" src="src/assets/fm.jpg" />
           </AspectRatio>
           <CardContent>
-            <Typography level="body-sm">Intro to the MUI ecosystem</Typography>
-            <Typography level="body-xs">Blog post</Typography>
+            <Typography level="body-sm">A project of Salah Tracker Creators</Typography>
           </CardContent>
         </Card>
         <List
@@ -111,13 +110,13 @@ export default function Footer() {
             <ListSubheader sx={{ fontWeight: 'xl' }}>Sitemap</ListSubheader>
             <List>
               <ListItem>
-                <ListItemButton>Services</ListItemButton>
+                <ListItemButton>Docs</ListItemButton>
               </ListItem>
               <ListItem>
-                <ListItemButton>Blog</ListItemButton>
+                <ListItemButton>Tracker</ListItemButton>
               </ListItem>
               <ListItem>
-                <ListItemButton>About</ListItemButton>
+                <ListItemButton>Ahadith</ListItemButton>
               </ListItem>
             </List>
           </ListItem>
@@ -125,13 +124,13 @@ export default function Footer() {
             <ListSubheader sx={{ fontWeight: 'xl' }}>Products</ListSubheader>
             <List>
               <ListItem>
-                <ListItemButton>Joy UI</ListItemButton>
+                Tracked prayers
+                </ListItem>
+              <ListItem>
+                Saved hadith
               </ListItem>
               <ListItem>
-                <ListItemButton>Base UI</ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>Material UI</ListItemButton>
+                Islamic date/time
               </ListItem>
             </List>
           </ListItem>

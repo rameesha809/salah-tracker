@@ -4,7 +4,13 @@ import axios from 'axios';
 export const postPrayer = createAsyncThunk(
   'api/postPrayer',
   async (prayerData) => {
-    try{const response = await axios.post('http://localhost:5000/api/postPrayer', prayerData);
+    try{
+      const token = localStorage.getItem('token');
+      const response = await axios.post('http://localhost:5000/api/postPrayer', prayerData,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     if(!response){
       console.log(error)
     }
@@ -21,7 +27,12 @@ export const fetchPrayers = createAsyncThunk(
   'api/fetchPrayers',
   async (userId) => {
       try {
-          const response = await axios.get(`http://localhost:5000/api/prayers/getPrayers/${userId}`);
+        const token = localStorage.getItem('token'); 
+          const response = await axios.get(`http://localhost:5000/api/prayers/getPrayers/${userId}`,{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           return response.data;
       } catch (error) {
           console.log(error);

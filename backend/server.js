@@ -7,6 +7,7 @@ import islamicDateTimeRoute from './routes/IslamicDateTime.js';
 import AdhkarRoute from './routes/Adhkar.js';
 import bodyParser from 'body-parser';
 import savedHadithRoutes from './routes/SaveHadith.js'
+import authMiddleware from './middleware/AuthMiddleware.js';
 const app = express();
 const port = 5000
 dotenv.config();

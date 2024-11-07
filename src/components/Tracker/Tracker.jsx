@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { postPrayer ,fetchPrayers} from '../../redux/PrayerSlice';
+import { postPrayer, fetchPrayers } from '../../redux/PrayerSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ThemeSignInPage from '../Auth/ThemeSignInPage';
+
 export default function Tracker() {
   const dispatch = useDispatch();
   const [prayersDone, setPrayerDone] = useState({
@@ -13,14 +15,13 @@ export default function Tracker() {
     sat: { fajr: false, dhuhr: false, asr: false, maghrib: false, isha: false },
     sun: { fajr: false, dhuhr: false, asr: false, maghrib: false, isha: false },
   });
-
+  const [showSignInModal, setShowSignInModal] = useState(false);
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   const prayers = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
   const user = useSelector((state) => state.auth.user);
-  console.log("user finalized: ",user)
   const userId = user ? user.id : null;
-  console.log("user selected:",userId)
+
   const getCurrentWeekDates = () => {
     const today = new Date();
     const currentDayIndex = today.getDay(); 
@@ -40,9 +41,12 @@ export default function Tracker() {
   const weekDates = getCurrentWeekDates();
 
   const handleSalahChange = async (day, prayer) => {
+    if (!user) {
+      setShowSignInModal(true); 
+      return;
+    }
     const newValue = !prayersDone[day][prayer];
     const prayerDate = weekDates[day]; 
-    console.log("Prayer Date:", prayerDate);
 
     setPrayerDone((prev) => ({
       ...prev,
@@ -51,18 +55,21 @@ export default function Tracker() {
         [prayer]: newValue, 
       },
     }));
+
     const prayerDetailsForDay = {
       ...prayersDone[day],
       [prayer]: newValue, 
       prayerDate,
     };
+
     dispatch(postPrayer({ userId, prayersDone: prayerDetailsForDay }));
   };
+
   const fetchPrayersData = async () => {
+    if (!userId) return; // Early return if no userId
     try {
       const response = await dispatch(fetchPrayers(userId)); 
       const fetchedData = response.payload; 
-      console.log("fetched data:",fetchedData);
       
       const updatedPrayersDone = { ...prayersDone };
       Object.entries(fetchedData).forEach(([date, prayerData]) => {
@@ -71,9 +78,6 @@ export default function Tracker() {
         const dayEntry = Object.entries(weekDates).find(([, weekDate]) => weekDate === date);
         if (dayEntry) {
           const [dayName] = dayEntry; 
-  
-          console.log(`Updating prayers for ${dayName} with data from ${date}`);
-          
           Object.entries(prayerData).forEach(([prayer, status]) => {
             updatedPrayersDone[dayName][prayer] = status.done; 
           });
@@ -87,8 +91,12 @@ export default function Tracker() {
   };
 
   useEffect(() => {
-    fetchPrayersData();
-  }, []);
+    if(userId){
+
+      fetchPrayersData(); 
+    }
+  }, [userId]);
+
   useEffect(() => {
     const allChecked = days.every((day) =>
       prayers.every((prayer) => prayersDone[day][prayer])
@@ -138,7 +146,15 @@ export default function Tracker() {
           </tbody>
         </table>
       </div>
+      {showSignInModal && (
+        <ThemeSignInPage
+          handleClose={() => setShowSignInModal(false)}
+          onLoginSuccess={(username) => {
+            console.log(`Welcome ${username}`);
+            setShowSignInModal(false);
+          }}
+        />
+      )}
     </div>
   );
-  
 }

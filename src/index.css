@@ -251,7 +251,8 @@ tbody{
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  /* z-index: 999; */
+  z-index: 1050;
 }
 
 .modal-container {
@@ -261,6 +262,7 @@ tbody{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   width: 400px;
+  z-index: 1060;
 }
 
 .close-button {

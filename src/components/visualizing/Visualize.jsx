@@ -8,11 +8,11 @@ export default function Visualize() {
   const dispatch = useDispatch();
   const [selectedChoice, setSelectedChoice] = useState('Prayed');
   const initialRows = [
-    { id: 1, salah: 'Fajr', missed: 0, offered: 5 },
-    { id: 2, salah: 'Dhuhr', missed: 0, offered: 5 },
-    { id: 3, salah: 'Asr', missed: 0, offered: 5 },
-    { id: 4, salah: 'Maghrib', missed: 0, offered: 5 },
-    { id: 5, salah: 'Isha', missed: 0, offered: 5 },
+    { id: 1, salah: 'Fajr', missed: 0, offered: 0 },
+    { id: 2, salah: 'Dhuhr', missed: 0, offered: 0 },
+    { id: 3, salah: 'Asr', missed: 0, offered: 0 },
+    { id: 4, salah: 'Maghrib', missed: 0, offered: 0 },
+    { id: 5, salah: 'Isha', missed: 0, offered: 0 },
   ];
   const prayerColors = [
     'rgba(255, 99, 132, 1)',
@@ -21,14 +21,22 @@ export default function Visualize() {
     'rgba(75, 192, 192, 1)',
     'rgba(153, 102, 255, 1)',
   ];
+  const user = useSelector((state) => state.auth.user);
+const userId = user ? user.id : null;
+
+useEffect(() => {
+  if (userId) {
+    dispatch(fetchMissedPrayers(userId));
+    dispatch(fetchOfferedPrayers(userId));
+  }
+}, [dispatch, userId]);
+
   const [rows, setRows] = useState(initialRows);
   useEffect(() => {
-    dispatch(fetchMissedPrayers(10));
-    dispatch(fetchOfferedPrayers(10));
+    dispatch(fetchMissedPrayers(userId));
+    dispatch(fetchOfferedPrayers(userId));
   }, [dispatch]);
   const { missedPrayers, offeredPrayers } = useSelector((state) => {
-    console.log("Current missed prayers state:", state.missing.missedPrayers);
-    console.log("Current offered prayers state:", state.missing.offeredPrayers);
     return {
       missedPrayers: state.missing.missedPrayers,
       offeredPrayers: state.missing.offeredPrayers,
@@ -36,8 +44,6 @@ export default function Visualize() {
   });
 
   useEffect(() => {
-    console.log("Missed Prayers:", missedPrayers);
-    console.log("Offered Prayers:", offeredPrayers);
     if (missedPrayers) {
       const updatedRows = initialRows.map((row) => ({
         ...row,
@@ -50,6 +56,7 @@ export default function Visualize() {
   const getPrayedData = () => {
     return rows.map(row => row.prayed);
   };
+  
   const getOfferedData = () => rows.map((row) => row.offered);
   const getMissedData = () => {
     return rows.map(row => row.missed);
@@ -89,6 +96,7 @@ export default function Visualize() {
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
       <div style={{ minHeight: '100vh', marginTop: '50px', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+      
         <Choice setSelectedChoice={setSelectedChoice} />
         <div style={{ marginTop: '50px', paddingBottom: '50px', width: '100%', height: '300px', display: 'flex', justifyContent: 'center' }}>
           {selectedChoice === 'Prayed' && (
@@ -110,4 +118,5 @@ export default function Visualize() {
 
     </div>
   )
+  
 }

@@ -6,10 +6,11 @@ import Tracker from './components/Tracker/Tracker';
 import AdhkarCards from './components/AdhkarCards';
 import Footer from './components/Footer';
 import AdhkarBookSelector from './components/AdhkarBookSelector';
-import Missing from './components/missingPrayer/missing';
+import Missing from './components/missingPrayer/Missing';
 import Visualize from './components/visualizing/Visualize';
 import 'animate.css';
 import SavedAdhkar from './components/SavedAdhkar';
+import Docs from './components/Docs';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/Visualize" element={<Visualize />} />
           <Route path="/Missing" element={<Missing />} />
           <Route path="/Saved" element={<SavedAdhkar />} />
+          <Route path="/Docs" element={<Docs />} />
         </Routes>
         <Footer />
       </Router>
