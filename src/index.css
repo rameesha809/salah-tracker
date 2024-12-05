@@ -1,3 +1,4 @@
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,12 +13,20 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body,html,#root{
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
 
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -26,15 +35,25 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+nav{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
+}
+.icon-blue {
+  color: rgb(20, 20, 75);
+}
+
+table tr .rounded-pill {
+  border-radius: 50px; 
+  background-color: #007bff;
+  color: white; 
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -46,23 +65,246 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.outer{
+  display: flex;
+  min-width: 100% !important;
+}
+.landing {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 36px;
+  height: 90vh;
+  min-width: 100% !important;
+  background-image: url(src/assets/fm.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.dark{
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 50%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: white;
 
+}
+.content{
+  width: 80%;
+  text-align: left;
+  padding-left: 5%;
+}
+.content p{
+  font-size:medium;
+  padding-top: 5%;
+
+}
+.container-outer{
+  background-color: #4b5892 ;
+  padding-top: 15px;
+  width: 100%;
+  height: 95vh;
+}
+.btn-outline-primary{
+  color: black !important;
+  background-color: white !important;
+  /* padding: 10%; */
+}
+.btndiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 70%;
+  margin-left: -25%;
+}
+td .btn-toggle {
+  display: inline-block;
+  width: 80%; /* Make the button fill the cell */
+  height: 50px; /* Control the height of the button */
+  border-radius: 50px; /* Rounded tablet look */
+  background-color: #6170af; /* Slightly greyer than table background */
+    border: none;
+    padding: 1rem 1rem;
+    transition: background-color 0.3s ease; 
+}
+.btn-check:checked + .btn-toggle {
+  background-color: white !important;
+}
+.mt-7 {
+  margin-top: 50px !important;
+}
+.btn-toggle:hover {
+  background-color: #b0bec5 !important; /* Darker grey on hover */
+}
+.container{
+  width: 100%;
+  background-color: #4b5892;
+}
+tbody{
+
+  --bs-table-bg: transparent;
+}
+.table {
+  color: white;
+  border-collapse: collapse;
+  table-layout: fixed;
+  max-width: 70%;
+}
+
+.table-bordered td, 
+.table-bordered th {
+  border: none !important; 
+}
+
+.table td, 
+.table th {
+  width: 12.5%; 
+  text-align: center; 
+}
+.adhkar-container{
+  width: 80%;
+}
+.adhimg img{
+  max-height: 200px;
+}
+.adh-outer{
+  height: 95vh;
+}
+.text{
+  font-size: larger;
+  font-style: italic;
+}
+.adh-btn{
+  margin: 40px;
+  width: 40%;
+}
+.Signindiv{
+  padding:50px;
+  padding-bottom: 100px;
+}
+.logindiv{
+  padding: 50px;
+}
+.date{
+  height:85%;
+  width:20%;
+}
+.dateinner{
+  height: fit-content;
+  
+}
+.card{
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.urdu-text {
+  font-family: 'Gulzar', serif;
+  font-size: 1.5rem; 
+  direction: rtl; 
+}
+.arabic-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.5rem; 
+  direction: rtl; 
+}
+.adhkar-final{
+  min-height: 90vh;
+}
+.table-two{
+  font-size: large;
+  border: none !important;
+  line-height: 40px;
+}
+.spanofmissed{
+  padding-right: 10px;
+}
+.salimg img{
+  max-height: 200px;
+}
+.blue{
+  background-color: #0A2744;
+  color:white;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 999; */
+  z-index: 1050;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 400px;
+  z-index: 1060;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Example of more specific targeting */
+.MuiBox-root{
+  margin-top: 0 !important;  
+}
+
+.css-14nepse-MuiStack-root{
+  display: none !important;
+}
+.css-14nepse-MuiStack-root{
+  display: none !important;
+}
+.MuiDivider-root{
+  display: none !important;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .table {
+    min-width: 100%;
   }
 }
