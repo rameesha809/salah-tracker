@@ -34,8 +34,8 @@ export default function Landing() {
 
   return (
     <>
-      <div className="outer">
-        <div className='landing'>
+      <div className="outer" style={{minHeight:'50vh'}}>
+        <div className='landing' style={{backgroundImage:'url(src/assets/fm.jpg)'}}>
           <div className="dark ">
             <div className="content"><h2>"Stay Connected with Your Prayers"
               <p>Track your Salah with ease and consistency.

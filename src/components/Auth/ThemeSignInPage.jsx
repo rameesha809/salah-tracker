@@ -9,17 +9,17 @@ import CloseIcon from '@mui/icons-material/Close';
 import { signIn } from '../../redux/SignInSlice';
 import 'animate.css';
 import { useDispatch } from 'react-redux';
-import { TextField } from '@mui/material';
-
+import { useSelector } from 'react-redux';
 const providers = [
   { id: 'github', name: 'GitHub' },
   { id: 'google', name: 'Google' },
   { id: 'credentials', name: 'Email and Password' },
 ];
-
 export default function ThemeSignInPage({ handleClose, onLoginSuccess }) {
   const [mode, setMode] = useState('light');
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.auth.error);
+  console.log("error:", error);
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function ThemeSignInPage({ handleClose, onLoginSuccess }) {
             position: 'relative',
             backgroundColor: 'white',
             padding: '20px',
-            height: '90%',
+            height: '75%',
             borderRadius: '8px',
             width: '400px',
             animation: 'zoomIn',
@@ -99,25 +99,46 @@ export default function ThemeSignInPage({ handleClose, onLoginSuccess }) {
             signIn={async (provider, formData) => {
               console.log('Provider:', provider);
               console.log('Form Data:', formData);
-
+  
               if (provider.id === 'credentials') {
                 const email = formData.get('email');
-                console.log(email);
                 const password = formData.get('password');
-                console.log(password);
-
+  
                 const username = email ? email.split('@')[0] : '';
-                console.log(username);
-                await dispatch(signIn({ provider, username, email, password }));
-                onLoginSuccess(username);
-                handleClose();
-              } else {
-                await dispatch(signIn({ provider }));
-                handleClose();
+                try {
+                  // Dispatch the signIn action and wait for the response
+                  const resultAction = await dispatch(signIn({ provider, username, email, password }));
+          
+                  // Check if the action was fulfilled (successful login)
+                  if (signIn.fulfilled.match(resultAction)) {
+                    onLoginSuccess(username); // Trigger on success
+                    handleClose(); // Close modal on success
+                  } else {
+                    // In case of failure, don't close the modal
+                    console.log("Sign-in error:", resultAction.payload || resultAction.error);
+                  }
+                } catch (error) {
+                  console.log("Sign-in error:", error);
+                  // Don't close the modal on failure
+                }
+              }  else {
+                await dispatch(signIn({ provider }))
+                .then(() => {
+                  handleClose(); // Close modal on success
+                })
+                .catch((error) => {
+                  // Handle error if needed
+                });
               }
             }}
             providers={providers}
           />
+          
+          {error && (
+            <div style={{ color: 'red' }}>
+              {error === 'Invalid password' ? 'The password you entered is incorrect.' : "Invalid credentials or Email username already taken"}
+            </div>
+          )}
         </div>
       </div>
     </AppProvider>

@@ -279,7 +279,15 @@ tbody{
   margin-top: 0 !important;  
 }
 
-
+.css-14nepse-MuiStack-root{
+  display: none !important;
+}
+.css-14nepse-MuiStack-root{
+  display: none !important;
+}
+.MuiDivider-root{
+  display: none !important;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
