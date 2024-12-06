@@ -56,6 +56,7 @@ export default function ThemeSignInPage({ handleClose, onLoginSuccess }) {
       },
     },
   });
+  const filteredProviders = providers.filter((provider) => provider.id === 'credentials');
 
   return (
     <AppProvider theme={THEME}>
@@ -131,7 +132,7 @@ export default function ThemeSignInPage({ handleClose, onLoginSuccess }) {
                 });
               }
             }}
-            providers={providers}
+            providers={filteredProviders}
           />
           
           {error && (
