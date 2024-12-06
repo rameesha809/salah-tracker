@@ -32,7 +32,7 @@ export default function SalahTracking() {
           <p>Track your missed salahs with ease, ensuring you never lose sight of your spiritual goals</p>
         </div>
         <div className="salimg d-flex justify-content-center align-items-center">
-          <img src="src/assets/time.png" alt="time" />
+          <img src="/assets/time.png" alt="time" />
         </div>
       </div>
       <button

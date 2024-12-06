@@ -94,7 +94,7 @@ export default function Footer() {
             minHeight={80}
             sx={{ flexBasis: { xs: 200, md: 'initial' } }}
           >
-            <img alt="" src="src/assets/fm.jpg" />
+            <img alt="" src="/assets/fm.jpg" />
           </AspectRatio>
           <CardContent>
             <Typography level="body-sm">A project of Salah Tracker Creators</Typography>

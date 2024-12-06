@@ -12,7 +12,7 @@ export default function Adhkar() {
         <b>"Acccess different hadith books and get ahadith in three different languages. (Arabic, Urdu, English)"
         </b></div>
       <div className="adhimg d-flex justify-content-center align-items-center">
-        <img src="src/assets/prayer-mat.png" alt="prayer" />
+        <img src="/assets/prayer-mat.png" alt="prayer" />
       </div>
     </div>
     <button className='adh-btn btn ' onClick={()=>handleClick()} style={{backgroundColor:'#12467B', color:'white'}}>Explore Hadith</button>
